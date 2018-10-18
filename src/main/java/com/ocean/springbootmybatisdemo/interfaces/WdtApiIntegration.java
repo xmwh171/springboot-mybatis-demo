@@ -1,9 +1,13 @@
 package com.ocean.springbootmybatisdemo.interfaces;
 
 import com.ocean.springbootmybatisdemo.interfaces.request.PurchaseOrderQueryRequest;
+import com.ocean.springbootmybatisdemo.interfaces.request.PurchaseReturnQueryRequest;
 import com.ocean.springbootmybatisdemo.interfaces.request.PurchaseStockinOrderQueryRequest;
+import com.ocean.springbootmybatisdemo.interfaces.request.StockoutOrderReturnQueryRequest;
 import com.ocean.springbootmybatisdemo.interfaces.result.PurchaseOrderQueryResult;
+import com.ocean.springbootmybatisdemo.interfaces.result.PurchaseReturnQueryResult;
 import com.ocean.springbootmybatisdemo.interfaces.result.PurchaseStockinOrderQueryResult;
+import com.ocean.springbootmybatisdemo.interfaces.result.StockoutOrderReturnQueryResult;
 import com.ocean.springbootmybatisdemo.util.DateUtils;
 import com.ocean.springbootmybatisdemo.util.HttpUtils;
 import com.ocean.springbootmybatisdemo.util.SignUtils;
@@ -44,6 +48,13 @@ public class WdtApiIntegration {
 
     static ObjectMapper mapper = new ObjectMapper();
 
+    /**
+    * method description.
+    * 查询ERP中采购单的信息
+    * @return 
+    * @Author Royal{xiaohu}
+    * @Date   2018/10/18 18:30
+    */
     public static PurchaseOrderQueryResult purchaseOrderQuery(PurchaseOrderQueryRequest request) throws Exception {
         PurchaseOrderQueryResult purchaseOrderQueryResult = new PurchaseOrderQueryResult();
         TreeMap<String, String> paramsMap = new TreeMap<String, String>();
@@ -63,7 +74,7 @@ public class WdtApiIntegration {
         if (request.getStatus() != 0) {
             paramsMap.put("status", request.getStatus() + "");
         }
-        if(request.getPageNo()>0){
+        if(request.getPageNo()>=0){
             paramsMap.put("page_no", request.getPageNo() + "");
         }
         if(request.getPageSize()>0){
@@ -99,6 +110,13 @@ public class WdtApiIntegration {
     }
 
 
+    /**
+    * method description.
+    * 查询ERP中的采购入库单信息
+    * @return 
+    * @Author Royal{xiaohu}
+    * @Date   2018/10/18 18:30
+    */
     public static PurchaseStockinOrderQueryResult purchaseStockinOrderQuery(PurchaseStockinOrderQueryRequest request) throws Exception {
         PurchaseStockinOrderQueryResult purchaseStockinOrderQueryResult = new PurchaseStockinOrderQueryResult();
         TreeMap<String, String> paramsMap = new TreeMap<String, String>();
@@ -110,7 +128,7 @@ public class WdtApiIntegration {
         if (request.getStatus() != 0) {
             paramsMap.put("status", request.getStatus() + "");
         }
-        if(request.getPageNo()>0){
+        if(request.getPageNo()>=0){
             paramsMap.put("page_no", request.getPageNo() + "");
         }
         if(request.getPageSize()>0){
@@ -144,4 +162,110 @@ public class WdtApiIntegration {
         queryResult.setSuccess(true);
         return queryResult;
     }
+
+    /**
+    * method description.
+    * 查询ERP中采购退货单信息
+    * @return 
+    * @Author Royal{xiaohu}
+    * @Date   2018/10/18 18:30
+    */
+    public static PurchaseReturnQueryResult purchaseReturnQuery(PurchaseReturnQueryRequest request) throws Exception {
+        PurchaseReturnQueryResult purchaseReturnQueryResult = new PurchaseReturnQueryResult();
+        TreeMap<String, String> paramsMap = new TreeMap<String, String>();
+        paramsMap.put("sid", WdtApiIntegration.sid);
+        paramsMap.put("appkey", WdtApiIntegration.appkey);
+        paramsMap.put("timestamp", "" + (System.currentTimeMillis() / 1000));
+        paramsMap.put("start_time", DateUtils.getNewFormatDateString(request.getStartTime()));
+        paramsMap.put("end_time",DateUtils.getNewFormatDateString(request.getEndTime()));
+        if (request.getStatus() != 0) {
+            paramsMap.put("status", request.getStatus() + "");
+        }
+        if(request.getPageNo()>=0){
+            paramsMap.put("page_no", request.getPageNo() + "");
+        }
+        if(request.getPageSize()>0){
+            paramsMap.put("page_size", request.getPageSize() + "");
+        }
+
+        String sign = SignUtils.md5Signature(paramsMap, WdtApiIntegration.appsecret);
+        paramsMap.put("sign", sign);
+
+        StringBuilder param = new StringBuilder();
+        for (Iterator<Map.Entry<String, String>> it = paramsMap.entrySet().iterator(); it.hasNext(); ) {
+            Map.Entry<String, String> e = it.next();
+            param.append("&").append(e.getKey()).append("=").append(e.getValue());
+        }
+        String postData = "";
+        postData = param.toString().substring(1);
+
+        String urlStr = WdtApiIntegration.wangdiantongurl + "/openapi2/purchase_return_query.php";
+        String result = HttpUtils.getResult(urlStr, postData);
+        if (result == null) {
+            return purchaseReturnQueryResult;
+        }
+
+        PurchaseReturnQueryResult queryResult = mapper.readValue(result.toString(), PurchaseReturnQueryResult.class);
+        if (queryResult == null) {
+            return purchaseReturnQueryResult;
+        }
+        if (queryResult.getCode() != 0) {
+            return queryResult;
+        }
+        queryResult.setSuccess(true);
+        return queryResult;
+
+    }
+
+    /**
+    * method description.
+    * 查询ERP中采购退货出库单信息
+    * @return 
+    * @Author Royal{xiaohu}
+    * @Date   2018/10/18 18:34
+    */
+    public static StockoutOrderReturnQueryResult stockoutOrderReturnQuery(StockoutOrderReturnQueryRequest request) throws Exception {
+        StockoutOrderReturnQueryResult stockoutOrderReturnQueryResult = new StockoutOrderReturnQueryResult();
+        TreeMap<String, String> paramsMap = new TreeMap<String, String>();
+        paramsMap.put("sid", WdtApiIntegration.sid);
+        paramsMap.put("appkey", WdtApiIntegration.appkey);
+        paramsMap.put("timestamp", "" + (System.currentTimeMillis() / 1000));
+        paramsMap.put("start_time", DateUtils.getNewFormatDateString(request.getStartTime()));
+        paramsMap.put("end_time",DateUtils.getNewFormatDateString(request.getEndTime()));
+        if(request.getPageNo()>=0){
+            paramsMap.put("page_no", request.getPageNo() + "");
+        }
+        if(request.getPageSize()>0){
+            paramsMap.put("page_size", request.getPageSize() + "");
+        }
+
+        String sign = SignUtils.md5Signature(paramsMap, WdtApiIntegration.appsecret);
+        paramsMap.put("sign", sign);
+
+        StringBuilder param = new StringBuilder();
+        for (Iterator<Map.Entry<String, String>> it = paramsMap.entrySet().iterator(); it.hasNext(); ) {
+            Map.Entry<String, String> e = it.next();
+            param.append("&").append(e.getKey()).append("=").append(e.getValue());
+        }
+        String postData = "";
+        postData = param.toString().substring(1);
+
+        String urlStr = WdtApiIntegration.wangdiantongurl + "/openapi2/stockout_order_query_return.php";
+        String result = HttpUtils.getResult(urlStr, postData);
+        if (result == null) {
+            return stockoutOrderReturnQueryResult;
+        }
+
+        StockoutOrderReturnQueryResult queryResult = mapper.readValue(result.toString(), StockoutOrderReturnQueryResult.class);
+        if (queryResult == null) {
+            return stockoutOrderReturnQueryResult;
+        }
+        if (queryResult.getCode() != 0) {
+            return queryResult;
+        }
+        queryResult.setSuccess(true);
+        return queryResult;
+
+    }
+
 }
