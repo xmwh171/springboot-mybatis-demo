@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ocean.springbootmybatisdemo.repository.dal.test.mapper.UserDOMapper">
+    <!-- 自动生成,请修改 USER.xml -->
+    <resultMap id="BaseResultMap"  type="com.ocean.springbootmybatisdemo.repository.dal.test.dataobject.UserDO">
+        <id column="ID" property="id" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="USERNAME" property="username" jdbcType="VARCHAR" javaType="String"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        ID,USERNAME
+    </sql>
+
+    <sql id="Base_SF_Column_List">
+        sf.ID,sf.USERNAME
+    </sql>
+
+
+    <!--insert:notify_record-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user(ID,USERNAME) VALUES (#{id,jdbcType=INTEGER},#{username,jdbcType=VARCHAR})
+    </insert>
+
+    <!--get:notify_record-->
+    <select id="findAllUser" resultMap="BaseResultMap">
+        select /*MS-USER-FINDALLUSER*/ id,username from user
+    </select>
+</mapper>

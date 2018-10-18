@@ -1,0 +1,47 @@
+<!DOCTYPE table SYSTEM "../config/table-config-1.0.dtd">
+<table sqlname="user_info" physicalName="user_info"
+       remark="user_info">
+    <!--  特殊字符说明 &lt;&gt; <> -->
+    <!-- baseSql option中 select * 会自动替换为 include -->
+    <sql id="Base_Column_List">
+        ID
+            ,NAME
+            ,AGE
+            ,GMT_CREATE
+            ,GMT_MODIFY
+    </sql>
+
+    <!-- baseSql option中 select sf.* 会自动替换为 include -->
+    <sql id="Base_SF_Column_List">
+        
+            sf.ID,
+            sf.NAME,
+            sf.AGE,
+            sf.GMT_CREATE,
+            sf.GMT_MODIFY
+    </sql>
+
+    <operation name="insert" paramtype="object" remark="插入表:user_info">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user_info(
+            ID
+            ,NAME
+            ,AGE
+            ,GMT_CREATE
+            ,GMT_MODIFY
+        )VALUES(
+             null
+            , #{name,jdbcType=VARCHAR}
+            , #{age,jdbcType=INTEGER}
+            , now()
+            , #{gmtModify,jdbcType=TIMESTAMP}
+        )
+    </operation>
+
+
+
+
+</table>

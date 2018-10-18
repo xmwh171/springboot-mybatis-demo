@@ -1,0 +1,17 @@
+<!DOCTYPE table SYSTEM "../config/table-config-1.0.dtd">
+<table sqlname="user" physicalName="user" remark="user">
+
+
+    <operation name="insert" paramtype="object" remark="insert:notify_record">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user(ID,USERNAME) VALUES (#{id,jdbcType=INTEGER},#{username,jdbcType=VARCHAR})
+    </operation>
+
+    <operation name="findAllUser" multiplicity="many" remark="get:notify_record">
+        select id,username from user
+    </operation>
+
+</table>
