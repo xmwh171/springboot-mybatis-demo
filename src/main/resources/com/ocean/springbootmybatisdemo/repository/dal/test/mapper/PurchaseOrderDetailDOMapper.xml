@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ocean.springbootmybatisdemo.repository.dal.test.mapper.PurchaseOrderDetailDOMapper">
+    <!-- 自动生成,请修改 PURCHASE_ORDER_DETAIL.xml -->
+    <resultMap id="BaseResultMap"  type="com.ocean.springbootmybatisdemo.repository.dal.test.dataobject.PurchaseOrderDetailDO">
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="PROP1" property="prop1" jdbcType="VARCHAR" javaType="String"/>
+        <result column="PROP2" property="prop2" jdbcType="VARCHAR" javaType="String"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR" javaType="String"/>
+        <result column="SPEC_NO" property="specNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="REC_ID" property="recId" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="PURCHASE_ID" property="purchaseId" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="MODIFIED" property="modified" jdbcType="DATE" javaType="java.util.Date"/>
+        <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="NUM" property="num" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="TAX" property="tax" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="PRICE" property="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="AMOUNT" property="amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="DISCOUNT" property="discount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="TAX_PRICE" property="taxPrice" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="TAX_AMOUNT" property="taxAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="STOCKIN_NUM" property="stockinNum" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="STOCKIN_AMOUNT" property="stockinAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+    </resultMap>
+
+
+    <sql id="Base_SF_Column_List">
+        
+            sf.ID,
+            sf.PROP1,
+            sf.PROP2,
+            sf.REMARK,
+            sf.SPEC_NO
+        ,
+            sf.REC_ID,
+            sf.PURCHASE_ID,
+            sf.MODIFIED,
+            sf.GMT_CREATE,
+            sf.GMT_MODIFY
+        ,
+            sf.NUM,
+            sf.TAX,
+            sf.PRICE,
+            sf.AMOUNT,
+            sf.DISCOUNT
+        ,
+            sf.TAX_PRICE,
+            sf.TAX_AMOUNT,
+            sf.STOCKIN_NUM,
+            sf.STOCKIN_AMOUNT
+    </sql>
+    <sql id="Base_Column_List">
+        ID
+            ,PROP1
+            ,PROP2
+            ,REMARK
+            ,SPEC_NO 
+        
+            ,REC_ID
+            ,PURCHASE_ID
+            ,MODIFIED
+            ,GMT_CREATE
+            ,GMT_MODIFY 
+        
+            ,NUM
+            ,TAX
+            ,PRICE
+            ,AMOUNT
+            ,DISCOUNT 
+        
+            ,TAX_PRICE
+            ,TAX_AMOUNT
+            ,STOCKIN_NUM
+            ,STOCKIN_AMOUNT
+    </sql>
+
+
+    <!--插入表:purchase_order_detail-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO purchase_order_detail(
+            ID
+            ,PROP1
+            ,PROP2
+            ,REMARK
+            ,SPEC_NO
+            ,REC_ID
+            ,PURCHASE_ID
+            ,MODIFIED
+            ,GMT_CREATE
+            ,GMT_MODIFY
+            ,NUM
+            ,TAX
+            ,PRICE
+            ,AMOUNT
+            ,DISCOUNT
+            ,TAX_PRICE
+            ,TAX_AMOUNT
+            ,STOCKIN_NUM
+            ,STOCKIN_AMOUNT
+        )VALUES(
+             null
+            , #{prop1,jdbcType=VARCHAR}
+            , #{prop2,jdbcType=VARCHAR}
+            , #{remark,jdbcType=VARCHAR}
+            , #{specNo,jdbcType=VARCHAR}
+            , #{recId,jdbcType=INTEGER}
+            , #{purchaseId,jdbcType=INTEGER}
+            , #{modified,jdbcType=DATE}
+            , now()
+            , #{gmtModify,jdbcType=TIMESTAMP}
+            , #{num,jdbcType=DECIMAL}
+            , #{tax,jdbcType=DECIMAL}
+            , #{price,jdbcType=DECIMAL}
+            , #{amount,jdbcType=DECIMAL}
+            , #{discount,jdbcType=DECIMAL}
+            , #{taxPrice,jdbcType=DECIMAL}
+            , #{taxAmount,jdbcType=DECIMAL}
+            , #{stockinNum,jdbcType=DECIMAL}
+            , #{stockinAmount,jdbcType=DECIMAL}
+        )
+    </insert>
+</mapper>

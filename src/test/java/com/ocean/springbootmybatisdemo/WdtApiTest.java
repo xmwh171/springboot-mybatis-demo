@@ -26,8 +26,8 @@ public class WdtApiTest extends TestCase {
     public void testPurchaseOrderQuery(){
         try {
             PurchaseOrderQueryRequest purchaseOrderQueryRequest = new PurchaseOrderQueryRequest();
-            String startTime = "2018-10-18 00:00:00";
-            String endTime= "2018-10-18 12:00:00";
+            String startTime = "2017-02-01 00:00:00";
+            String endTime= "2018-10-19 12:00:00";
             purchaseOrderQueryRequest.setStartTime(DateUtils.parseDateNewFormat(startTime));
             purchaseOrderQueryRequest.setEndTime(DateUtils.parseDateNewFormat(endTime));
             purchaseOrderQueryRequest.setPageSize(100); // 最大100

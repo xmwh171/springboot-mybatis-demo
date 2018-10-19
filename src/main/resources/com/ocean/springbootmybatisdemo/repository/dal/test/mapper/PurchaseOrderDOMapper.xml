@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ocean.springbootmybatisdemo.repository.dal.test.mapper.PurchaseOrderDOMapper">
+    <!-- 自动生成,请修改 PURCHASE_ORDER.xml -->
+    <resultMap id="BaseResultMap"  type="com.ocean.springbootmybatisdemo.repository.dal.test.dataobject.PurchaseOrderDO">
+        <id column="ID" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="PROP1" property="prop1" jdbcType="VARCHAR" javaType="String"/>
+        <result column="PROP2" property="prop2" jdbcType="VARCHAR" javaType="String"/>
+        <result column="TELNO" property="telno" jdbcType="VARCHAR" javaType="String"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR" javaType="String"/>
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR" javaType="String"/>
+        <result column="OUTER_NO" property="outerNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="PROVIDER_NO" property="providerNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="PURCHASE_NO" property="purchaseNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="WAREHOUSE_NO" property="warehouseNo" jdbcType="VARCHAR" javaType="String"/>
+        <result column="PROVIDER_NAME" property="providerName" jdbcType="VARCHAR" javaType="String"/>
+        <result column="RECEIVE_ADDRESS" property="receiveAddress" jdbcType="VARCHAR" javaType="String"/>
+        <result column="STATUS" property="status" jdbcType="TINYINT" javaType="Integer"/>
+        <result column="PURCHASE_ID" property="purchaseId" jdbcType="INTEGER" javaType="Integer"/>
+        <result column="LOGISTICS_TYPE" property="logisticsType" jdbcType="SMALLINT" javaType="Integer"/>
+        <result column="CREATED" property="created" jdbcType="DATE" javaType="java.util.Date"/>
+        <result column="MODIFIED" property="modified" jdbcType="DATE" javaType="java.util.Date"/>
+        <result column="CHECK_TIME" property="checkTime" jdbcType="DATE" javaType="java.util.Date"/>
+        <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="GMT_MODIFY" property="gmtModify" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="EXPECT_ARRIVE_TIME" property="expectArriveTime" jdbcType="DATE" javaType="java.util.Date"/>
+        <result column="POST_FEE" property="postFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="OTHER_FEE" property="otherFee" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="GOODS_AMOUNT" property="goodsAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+        <result column="TAX_GOODS_AMOUNT" property="taxGoodsAmount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+    </resultMap>
+
+
+    <sql id="Base_SF_Column_List">
+        
+            sf.ID,
+            sf.PROP1,
+            sf.PROP2,
+            sf.TELNO,
+            sf.REMARK
+        ,
+            sf.CONTACT,
+            sf.OUTER_NO,
+            sf.PROVIDER_NO,
+            sf.PURCHASE_NO,
+            sf.WAREHOUSE_NO
+        ,
+            sf.PROVIDER_NAME,
+            sf.RECEIVE_ADDRESS,
+            sf.STATUS,
+            sf.PURCHASE_ID,
+            sf.LOGISTICS_TYPE
+        ,
+            sf.CREATED,
+            sf.MODIFIED,
+            sf.CHECK_TIME,
+            sf.GMT_CREATE,
+            sf.GMT_MODIFY
+        ,
+            sf.EXPECT_ARRIVE_TIME,
+            sf.POST_FEE,
+            sf.OTHER_FEE,
+            sf.GOODS_AMOUNT,
+            sf.TAX_GOODS_AMOUNT
+    </sql>
+    <sql id="Base_Column_List">
+        ID
+            ,PROP1
+            ,PROP2
+            ,TELNO
+            ,REMARK 
+        
+            ,CONTACT
+            ,OUTER_NO
+            ,PROVIDER_NO
+            ,PURCHASE_NO
+            ,WAREHOUSE_NO 
+        
+            ,PROVIDER_NAME
+            ,RECEIVE_ADDRESS
+            ,STATUS
+            ,PURCHASE_ID
+            ,LOGISTICS_TYPE 
+        
+            ,CREATED
+            ,MODIFIED
+            ,CHECK_TIME
+            ,GMT_CREATE
+            ,GMT_MODIFY 
+        
+            ,EXPECT_ARRIVE_TIME
+            ,POST_FEE
+            ,OTHER_FEE
+            ,GOODS_AMOUNT
+            ,TAX_GOODS_AMOUNT
+    </sql>
+
+
+    <!--插入表:purchase_order-->
+    <insert id="insert" >
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO purchase_order(
+            ID
+            ,PROP1
+            ,PROP2
+            ,TELNO
+            ,REMARK
+            ,CONTACT
+            ,OUTER_NO
+            ,PROVIDER_NO
+            ,PURCHASE_NO
+            ,WAREHOUSE_NO
+            ,PROVIDER_NAME
+            ,RECEIVE_ADDRESS
+            ,STATUS
+            ,PURCHASE_ID
+            ,LOGISTICS_TYPE
+            ,CREATED
+            ,MODIFIED
+            ,CHECK_TIME
+            ,GMT_CREATE
+            ,GMT_MODIFY
+            ,EXPECT_ARRIVE_TIME
+            ,POST_FEE
+            ,OTHER_FEE
+            ,GOODS_AMOUNT
+            ,TAX_GOODS_AMOUNT
+        )VALUES(
+             null
+            , #{prop1,jdbcType=VARCHAR}
+            , #{prop2,jdbcType=VARCHAR}
+            , #{telno,jdbcType=VARCHAR}
+            , #{remark,jdbcType=VARCHAR}
+            , #{contact,jdbcType=VARCHAR}
+            , #{outerNo,jdbcType=VARCHAR}
+            , #{providerNo,jdbcType=VARCHAR}
+            , #{purchaseNo,jdbcType=VARCHAR}
+            , #{warehouseNo,jdbcType=VARCHAR}
+            , #{providerName,jdbcType=VARCHAR}
+            , #{receiveAddress,jdbcType=VARCHAR}
+            , #{status,jdbcType=TINYINT}
+            , #{purchaseId,jdbcType=INTEGER}
+            , #{logisticsType,jdbcType=SMALLINT}
+            , #{created,jdbcType=DATE}
+            , #{modified,jdbcType=DATE}
+            , #{checkTime,jdbcType=DATE}
+            , now()
+            , #{gmtModify,jdbcType=TIMESTAMP}
+            , #{expectArriveTime,jdbcType=DATE}
+            , #{postFee,jdbcType=DECIMAL}
+            , #{otherFee,jdbcType=DECIMAL}
+            , #{goodsAmount,jdbcType=DECIMAL}
+            , #{taxGoodsAmount,jdbcType=DECIMAL}
+        )
+    </insert>
+
+    <!--insert:purchase_order-->
+    <select id="batchSave" resultMap="BaseResultMap">
+        INSERT INTO purchase_order( ID
+        ,PROP1
+        ,PROP2
+        ,TELNO
+        ,REMARK
+        ,CONTACT
+        ,OUTER_NO
+        ,PROVIDER_NO
+        ,PURCHASE_NO
+        ,WAREHOUSE_NO
+        ,PROVIDER_NAME
+        ,RECEIVE_ADDRESS
+        ,STATUS
+        ,PURCHASE_ID
+        ,LOGISTICS_TYPE
+        ,CREATED
+        ,MODIFIED
+        ,CHECK_TIME
+        ,GMT_CREATE
+        ,GMT_MODIFY
+        ,EXPECT_ARRIVE_TIME
+        ,POST_FEE
+        ,OTHER_FEE
+        ,GOODS_AMOUNT
+        ,TAX_GOODS_AMOUNT)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            null
+            , #{item.prop1,jdbcType=VARCHAR}
+            , #{item.prop2,jdbcType=VARCHAR}
+            , #{item.telno,jdbcType=VARCHAR}
+            , #{item.remark,jdbcType=VARCHAR}
+            , #{item.contact,jdbcType=VARCHAR}
+            , #{item.outerNo,jdbcType=VARCHAR}
+            , #{item.providerNo,jdbcType=VARCHAR}
+            , #{item.purchaseNo,jdbcType=VARCHAR}
+            , #{item.warehouseNo,jdbcType=VARCHAR}
+            , #{item.providerName,jdbcType=VARCHAR}
+            , #{item.receiveAddress,jdbcType=VARCHAR}
+            , #{item.status,jdbcType=TINYINT}
+            , #{item.purchaseId,jdbcType=INTEGER}
+            , #{item.logisticsType,jdbcType=SMALLINT}
+            , #{item.created,jdbcType=DATE}
+            , #{item.modified,jdbcType=DATE}
+            , #{item.checkTime,jdbcType=DATE}
+            , now()
+            , #{item.gmtModify,jdbcType=TIMESTAMP}
+            , #{item.expectArriveTime,jdbcType=DATE}
+            , #{item.postFee,jdbcType=DECIMAL}
+            , #{item.otherFee,jdbcType=DECIMAL}
+            , #{item.goodsAmount,jdbcType=DECIMAL}
+            , #{item.taxGoodsAmount,jdbcType=DECIMAL})
+        </foreach>
+    </select>
+</mapper>

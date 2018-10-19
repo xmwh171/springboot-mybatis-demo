@@ -1,0 +1,190 @@
+<!DOCTYPE table SYSTEM "../config/table-config-1.0.dtd">
+<table sqlname="purchase_order" physicalName="purchase_order"
+       remark="purchase_order">
+    <!--  特殊字符说明 &lt;&gt; <> -->
+    <!-- baseSql option中 select * 会自动替换为 include -->
+    <sql id="Base_Column_List">
+        ID
+            ,PROP1
+            ,PROP2
+            ,TELNO
+            ,REMARK 
+        
+            ,CONTACT
+            ,OUTER_NO
+            ,PROVIDER_NO
+            ,PURCHASE_NO
+            ,WAREHOUSE_NO 
+        
+            ,PROVIDER_NAME
+            ,RECEIVE_ADDRESS
+            ,STATUS
+            ,PURCHASE_ID
+            ,LOGISTICS_TYPE 
+        
+            ,CREATED
+            ,MODIFIED
+            ,CHECK_TIME
+            ,GMT_CREATE
+            ,GMT_MODIFY 
+        
+            ,EXPECT_ARRIVE_TIME
+            ,POST_FEE
+            ,OTHER_FEE
+            ,GOODS_AMOUNT
+            ,TAX_GOODS_AMOUNT
+    </sql>
+
+    <!-- baseSql option中 select sf.* 会自动替换为 include -->
+    <sql id="Base_SF_Column_List">
+        
+            sf.ID,
+            sf.PROP1,
+            sf.PROP2,
+            sf.TELNO,
+            sf.REMARK
+        ,
+            sf.CONTACT,
+            sf.OUTER_NO,
+            sf.PROVIDER_NO,
+            sf.PURCHASE_NO,
+            sf.WAREHOUSE_NO
+        ,
+            sf.PROVIDER_NAME,
+            sf.RECEIVE_ADDRESS,
+            sf.STATUS,
+            sf.PURCHASE_ID,
+            sf.LOGISTICS_TYPE
+        ,
+            sf.CREATED,
+            sf.MODIFIED,
+            sf.CHECK_TIME,
+            sf.GMT_CREATE,
+            sf.GMT_MODIFY
+        ,
+            sf.EXPECT_ARRIVE_TIME,
+            sf.POST_FEE,
+            sf.OTHER_FEE,
+            sf.GOODS_AMOUNT,
+            sf.TAX_GOODS_AMOUNT
+    </sql>
+
+    <operation name="insert" paramtype="object" remark="插入表:purchase_order">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO purchase_order(
+            ID
+            ,PROP1
+            ,PROP2
+            ,TELNO
+            ,REMARK
+            ,CONTACT
+            ,OUTER_NO
+            ,PROVIDER_NO
+            ,PURCHASE_NO
+            ,WAREHOUSE_NO
+            ,PROVIDER_NAME
+            ,RECEIVE_ADDRESS
+            ,STATUS
+            ,PURCHASE_ID
+            ,LOGISTICS_TYPE
+            ,CREATED
+            ,MODIFIED
+            ,CHECK_TIME
+            ,GMT_CREATE
+            ,GMT_MODIFY
+            ,EXPECT_ARRIVE_TIME
+            ,POST_FEE
+            ,OTHER_FEE
+            ,GOODS_AMOUNT
+            ,TAX_GOODS_AMOUNT
+        )VALUES(
+             null
+            , #{prop1,jdbcType=VARCHAR}
+            , #{prop2,jdbcType=VARCHAR}
+            , #{telno,jdbcType=VARCHAR}
+            , #{remark,jdbcType=VARCHAR}
+            , #{contact,jdbcType=VARCHAR}
+            , #{outerNo,jdbcType=VARCHAR}
+            , #{providerNo,jdbcType=VARCHAR}
+            , #{purchaseNo,jdbcType=VARCHAR}
+            , #{warehouseNo,jdbcType=VARCHAR}
+            , #{providerName,jdbcType=VARCHAR}
+            , #{receiveAddress,jdbcType=VARCHAR}
+            , #{status,jdbcType=TINYINT}
+            , #{purchaseId,jdbcType=INTEGER}
+            , #{logisticsType,jdbcType=SMALLINT}
+            , #{created,jdbcType=DATE}
+            , #{modified,jdbcType=DATE}
+            , #{checkTime,jdbcType=DATE}
+            , now()
+            , #{gmtModify,jdbcType=TIMESTAMP}
+            , #{expectArriveTime,jdbcType=DATE}
+            , #{postFee,jdbcType=DECIMAL}
+            , #{otherFee,jdbcType=DECIMAL}
+            , #{goodsAmount,jdbcType=DECIMAL}
+            , #{taxGoodsAmount,jdbcType=DECIMAL}
+        )
+    </operation>
+
+    <operation name="batchSave" paramtype="objectList" remark="insert:purchase_order">
+        INSERT INTO purchase_order( ID
+        ,PROP1
+        ,PROP2
+        ,TELNO
+        ,REMARK
+        ,CONTACT
+        ,OUTER_NO
+        ,PROVIDER_NO
+        ,PURCHASE_NO
+        ,WAREHOUSE_NO
+        ,PROVIDER_NAME
+        ,RECEIVE_ADDRESS
+        ,STATUS
+        ,PURCHASE_ID
+        ,LOGISTICS_TYPE
+        ,CREATED
+        ,MODIFIED
+        ,CHECK_TIME
+        ,GMT_CREATE
+        ,GMT_MODIFY
+        ,EXPECT_ARRIVE_TIME
+        ,POST_FEE
+        ,OTHER_FEE
+        ,GOODS_AMOUNT
+        ,TAX_GOODS_AMOUNT)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            null
+            , #{item.prop1,jdbcType=VARCHAR}
+            , #{item.prop2,jdbcType=VARCHAR}
+            , #{item.telno,jdbcType=VARCHAR}
+            , #{item.remark,jdbcType=VARCHAR}
+            , #{item.contact,jdbcType=VARCHAR}
+            , #{item.outerNo,jdbcType=VARCHAR}
+            , #{item.providerNo,jdbcType=VARCHAR}
+            , #{item.purchaseNo,jdbcType=VARCHAR}
+            , #{item.warehouseNo,jdbcType=VARCHAR}
+            , #{item.providerName,jdbcType=VARCHAR}
+            , #{item.receiveAddress,jdbcType=VARCHAR}
+            , #{item.status,jdbcType=TINYINT}
+            , #{item.purchaseId,jdbcType=INTEGER}
+            , #{item.logisticsType,jdbcType=SMALLINT}
+            , #{item.created,jdbcType=DATE}
+            , #{item.modified,jdbcType=DATE}
+            , #{item.checkTime,jdbcType=DATE}
+            , now()
+            , #{item.gmtModify,jdbcType=TIMESTAMP}
+            , #{item.expectArriveTime,jdbcType=DATE}
+            , #{item.postFee,jdbcType=DECIMAL}
+            , #{item.otherFee,jdbcType=DECIMAL}
+            , #{item.goodsAmount,jdbcType=DECIMAL}
+            , #{item.taxGoodsAmount,jdbcType=DECIMAL})
+        </foreach>
+    </operation>
+
+
+</table>
